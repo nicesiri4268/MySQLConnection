@@ -9,6 +9,7 @@ public class MysqlMessage {
     private String DBUser = "";
     private String DBUserserPasswd = "";
     private String connName = "";
+    private String allMessage = "";
     private Connection connection = null;
 
 
@@ -60,8 +61,8 @@ public class MysqlMessage {
         return connection;
     }
 
-    public AllMessage getAllMessage() {
-        AllMessage allMessage = new AllMessage(this.DBName, this.DBUser, this.DBUserserPasswd, this.connName);
+    public String getAllMessage() {
+        allMessage = "数据库名称：" + this.DBName + "/n用户名：" + this.DBUser + "JDBC连接：" + this.connName;
         return allMessage;
     }
 }
