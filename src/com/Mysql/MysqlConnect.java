@@ -16,14 +16,13 @@ public class MysqlConnect {
     }
 
     public String setPstmtParam(String SQL, int[] columns, String[] values) {
-        /**
+        /*
          * 预编译命令SQL
          * 需要提供一个int类型的类型标识数组，和一个String类型的值数组
          * Types.Integer 为类型标识数组的值
          * 结果集放置在MySQLConnection类中,调用getResultType获取
          * 返回值为String类型，当执行成功时返回”执行成功“
          * 同时有可能出现的错误有，SQL为空，SQL预编译失败，SQL
-         *
          */
 
         if (SQL == null) return "SQL为空";
@@ -37,28 +36,7 @@ public class MysqlConnect {
             //分类填入预编译类中
             for (int i = 0; i < columns.length; i++) {
                 try {
-                    switch (columns[i]) {
-                        case Types.INTEGER: {
-                            preparedStatement.setInt(i + 1, Integer.parseInt(values[i]));
-                            break;
-                        }
-                        case Types.FLOAT: {
-                            preparedStatement.setFloat(i + 1, Float.parseFloat(values[i]));
-                            break;
-                        }
-                        case Types.DOUBLE: {
-                            preparedStatement.setDouble(i + 1, Double.parseDouble(values[i]));
-                            break;
-                        }
-                        case Types.VARCHAR: {
-                            preparedStatement.setString(i + 1, values[i]);
-                            break;
-                        }
-                        default: {
-                            throw new MysqlConnectException("第" + (i + 1) + "个参数出现问题");
-                        }
-                        //可自行添加输入项
-                    }
+                    switchColumnsType(columns, values, i);//预编译后的赋值
                 } catch (SQLException throwable) {
                     throwable.printStackTrace();
                     return "第" + i + "个赋值失败";
@@ -68,6 +46,7 @@ public class MysqlConnect {
                 }
             }
         } else if (columns == null && values == null) {
+            return "类型数组和值数组为空";
         } else {
             return "类型数组或值数组出现错误";
         }
@@ -84,6 +63,37 @@ public class MysqlConnect {
             throwables.printStackTrace();
         }
         return "预编译成功";
+    }
+
+    /**
+     * @param columns 参数1 int数组存储着有关value的类型
+     * @param values  参数2 String数组 存储着预编译后的要赋的值
+     * @param i       参数3 循环的次数
+     * @apiNote 可以添加Type.的分支以适应更多类型
+     */
+    private void switchColumnsType(int[] columns, String[] values, int i) throws SQLException {
+        switch (columns[i]) {
+            case Types.INTEGER: {
+                preparedStatement.setInt(i + 1, Integer.parseInt(values[i]));
+                break;
+            }
+            case Types.FLOAT: {
+                preparedStatement.setFloat(i + 1, Float.parseFloat(values[i]));
+                break;
+            }
+            case Types.DOUBLE: {
+                preparedStatement.setDouble(i + 1, Double.parseDouble(values[i]));
+                break;
+            }
+            case Types.VARCHAR: {
+                preparedStatement.setString(i + 1, values[i]);
+                break;
+            }
+            default: {
+                throw new MysqlConnectException("第" + (i + 1) + "个参数出现问题");
+            }
+            //可自行添加输入项
+        }
     }
 
     public PreparedStatement getPreparedStatement() {
