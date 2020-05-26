@@ -34,10 +34,6 @@ public class MysqlMessage {
     }
 
     public MysqlMessage() {
-        /*测试用例*/
-        setDBName("test");
-        setDBUser("siri");
-        setDBUserserPasswd("zhu135335");
     }
 
     //为了重设连接名字需要更改时使用
