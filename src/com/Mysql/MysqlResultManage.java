@@ -4,20 +4,18 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 public class MysqlResultManage {
-    private ResultSet resultSet = null;
+    private ResultSet resultSet;
     private String[] columnsName = null;
     private DoubleArray[] doubleArrays;
     private Map<String, ArrayList<String>> map;
 
     public MysqlResultManage(ResultType resultType) {
         this.resultSet = resultType.getResultSet();
-        map = new ConcurrentHashMap<String, ArrayList<String>>();//初始化map
+        map = new ConcurrentHashMap<>();//初始化map
     }
 
     public DataTable manageResult() {
@@ -66,12 +64,6 @@ public class MysqlResultManage {
         return null;
     }
 
-    /**
-     * @program: MySql工具类
-     * @description: Mysql数据集处理类
-     * @author: nicesiri
-     * @create: 2020-05-15 15:08
-     */
     //需要处理查询单行，多行
     class DoubleArray {
         //内部类，实现的是DoubleArray内部封装ArrayList<String>
@@ -79,7 +71,7 @@ public class MysqlResultManage {
         private final ArrayList<String> arrayList;
 
         public DoubleArray() {
-            arrayList = new ArrayList<String>();
+            arrayList = new ArrayList<>();
         }
 
         public void add(String value) {
