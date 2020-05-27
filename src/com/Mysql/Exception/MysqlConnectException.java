@@ -1,7 +1,5 @@
 package com.Mysql.Exception;
 
-import java.awt.event.FocusEvent;
-
 public class MysqlConnectException extends RuntimeException {
     /**
      * @program: MySql工具类
