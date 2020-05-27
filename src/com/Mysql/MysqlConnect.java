@@ -52,7 +52,8 @@ public class MysqlConnect {
                 }
             }
         } else if (columnsType == null && values == null) {
-            return "类型数组和值数组为空";
+            System.out.print("");
+            //允许类型数组或者值数组为空
         } else {
             return "类型数组或值数组出现错误";
         }

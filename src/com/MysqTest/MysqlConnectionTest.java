@@ -1,9 +1,6 @@
 package com.MysqTest;
 
-import com.Mysql.DataTable;
-import com.Mysql.MysqlConnect;
-import com.Mysql.MysqlMessage;
-import com.Mysql.MysqlResultManage;
+import com.Mysql.*;
 
 import java.sql.*;
 
@@ -11,7 +8,7 @@ public class MysqlConnectionTest {
     public MysqlConnectionTest() {
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
         MysqlMessage mysqlMessage = new MysqlMessage("test", "siri", "zhu135335");
         //String sql = "select Sno,Sname from student where Sno=?&&Sname=?";
         //int [] columns= {Types.INTEGER, Types.VARCHAR};
@@ -32,6 +29,7 @@ public class MysqlConnectionTest {
         }*/
 
         System.out.println("新方式");
+        ResultType resultType = connect.getResultType();
         MysqlResultManage mysqlResultManage =
                 new MysqlResultManage(connect.getResultType());
         DataTable dataTable = mysqlResultManage.manageResult();//返回一个DataTable对象

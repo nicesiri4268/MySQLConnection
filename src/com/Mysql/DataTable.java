@@ -3,7 +3,7 @@ package com.Mysql;
 import java.sql.Connection;
 import java.util.*;
 
-public class DataTable extends HashMap {
+public class DataTable {
     /**
      * @program: MySql工具类
      * @description:
