@@ -8,13 +8,23 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MysqlResultManage {
-    private ResultSet resultSet;
+    private ResultSet resultSet = null;
+    private int resultCount = -1;
     private String[] columnsName = null;
     private DoubleArray[] doubleArrays;
     private Map<String, ArrayList<String>> map;
 
+    /*
+     * 从ResultType传入一个ResultSet或者resultCount
+     * 调用 manageResult()方法，返回一个DataTable对象
+     * 或者直接调用getResultCount()返回一个int值，表示修改了多少行
+     * */
     public MysqlResultManage(ResultType resultType) {
-        this.resultSet = resultType.getResultSet();
+        if (resultType.getResultSet() != null) {
+            this.resultSet = resultType.getResultSet();
+        } else if (resultType.getResultCount() != -1) {
+            this.resultCount = resultType.getResultCount();
+        }
         map = new ConcurrentHashMap<>();//初始化map
     }
 
@@ -59,6 +69,14 @@ public class MysqlResultManage {
         return null;
     }
 
+    public int getResultCount() {
+        if (resultCount != -1)
+            return this.resultCount;
+        else {
+            return -1;
+        }
+    }
+
     //需要处理查询单行，多行
     class DoubleArray {
         //内部类，实现的是DoubleArray内部封装ArrayList<String>
@@ -77,6 +95,4 @@ public class MysqlResultManage {
             return arrayList;
         }
     }
-
-
 }
