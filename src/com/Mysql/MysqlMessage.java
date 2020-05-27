@@ -14,10 +14,17 @@ public class MysqlMessage {
 
 
     public MysqlMessage(String DBName, String DBUser, String DBUserserPasswd) {
+        /*
+         * 对类进行初始化操作
+         * DBName 数据库名称，具体看你的数据库设置名
+         * DBUser 数据库用户名称
+         * DBUserPasswd 数据库用户密码
+         * */
+        super();
         this.DBName = DBName;
         this.DBUser = DBUser;
         this.DBUserserPasswd = DBUserserPasswd;//为了安全这里可以更改
-        this.connName = setConnName();
+        this.connName = getConnName();
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             this.connection = DriverManager.getConnection(this.connName,
@@ -34,6 +41,7 @@ public class MysqlMessage {
     }
 
     public MysqlMessage() {
+        super();
     }
 
     //为了重设连接名字需要更改时使用
@@ -49,7 +57,7 @@ public class MysqlMessage {
         this.DBUserserPasswd = DBUserserPasswd;
     }
 
-    private String setConnName() {
+    private String getConnName() {
         return "jdbc:mysql://localhost:3306/" + DBName + "?useSSL=false&serverTimezone=UTC";
     }
 

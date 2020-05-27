@@ -9,13 +9,19 @@ public class MysqlConnect {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
     private int resultCounts = -1;
-
+    /*
+     * 使用MySQLMessage产生的Connection对象，
+     * 创建PrepareStatement对象
+     * 预编译SQL
+     * 对SQL赋值：columnsType数组（int）,values数组（String）
+     * 使用方法getResultType（）， 返回一个ResultType类（封装Result和ResultCount属性）
+     * */
 
     public MysqlConnect(MysqlMessage mysqlMessage) {
         connection = mysqlMessage.getConnection();//从mysqlMessage获取连接
     }
 
-    public String setPstmtParam(String SQL, int[] columns, String[] values) {
+    public String setPstmtParam(String SQL, int[] columnsType, String[] values) {
         /*
          * 预编译命令SQL
          * 需要提供一个int类型的类型标识数组，和一个String类型的值数组
@@ -32,11 +38,11 @@ public class MysqlConnect {
             throwables.printStackTrace();
             return "预编译失败";
         }
-        if (columns != null && values != null && columns.length == values.length) {
+        if (columnsType != null && values != null && columnsType.length == values.length) {
             //分类填入预编译类中
-            for (int i = 0; i < columns.length; i++) {
+            for (int i = 0; i < columnsType.length; i++) {
                 try {
-                    switchColumnsType(columns, values, i);//预编译后的赋值
+                    switchColumnsType(columnsType, values, i);//预编译后的赋值
                 } catch (SQLException throwable) {
                     throwable.printStackTrace();
                     return "第" + i + "个赋值失败";
@@ -45,7 +51,7 @@ public class MysqlConnect {
                     return "赋值失败" + "编号" + i;
                 }
             }
-        } else if (columns == null && values == null) {
+        } else if (columnsType == null && values == null) {
             return "类型数组和值数组为空";
         } else {
             return "类型数组或值数组出现错误";

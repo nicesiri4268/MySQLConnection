@@ -39,11 +39,6 @@ public class MysqlResultManage {
             while (resultSet.next()) {
                 //一个arraylist的数组
                 for (int i = 0; i < n; i++) {//循环获取列名，提取表中的数据值
-                    //这里如果有一个key-value的数据结构就好了
-                    //开始学习Map接口
-                    //计划使用键值对的方式存储查询表数据
-                    //String value = resultSet.getString(i);
-                    //生成的map的ColumnsName都是key=Sno，导致map一直在修改Value,所以修改map为<String，String[]>
                     String arrayListValue;
                     arrayListValue = resultSet.getObject(columnsName[i]).toString();//将所有表的信息都转换为String类型
                     doubleArrays[i].add(arrayListValue);//赋值到DoubleArrays内部类的Arraylist里面
