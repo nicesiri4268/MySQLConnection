@@ -29,7 +29,7 @@ public class MysqlConnectionTest {
         }*/
 
         System.out.println("新方式");
-        ResultType resultType = connect.getResultType();
+        //ResultType resultType = connect.getResultType();
         MysqlResultManage mysqlResultManage =
                 new MysqlResultManage(connect.getResultType());
         DataTable dataTable = mysqlResultManage.manageResult();//返回一个DataTable对象

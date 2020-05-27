@@ -50,7 +50,14 @@ public class MysqlResultManage {
                 //一个arraylist的数组
                 for (int i = 0; i < n; i++) {//循环获取列名，提取表中的数据值
                     String arrayListValue;
-                    arrayListValue = resultSet.getObject(columnsName[i]).toString();//将所有表的信息都转换为String类型
+                    Object temptest = resultSet.getObject(columnsName[i]);
+                    if (temptest != null) {
+                        //此处放置返回的是空值，导致出现nullpoint异常
+                        arrayListValue = temptest.toString();
+                    } else {
+                        arrayListValue = null;
+                    }
+                    //将所有表的信息都转换为String类型
                     doubleArrays[i].add(arrayListValue);//赋值到DoubleArrays内部类的Arraylist里面
                 }
             }
