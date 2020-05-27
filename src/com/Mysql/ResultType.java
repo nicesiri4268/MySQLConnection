@@ -46,7 +46,7 @@ public class ResultType {
     }
 
     public int getResultCount() {
-        if (resultCount != -1 && resultSetFlag == true) {
+        if (resultCount != -1 && resultSetFlag == false) {
             return resultCount;
         }
         return -1;

@@ -61,9 +61,11 @@ public class MysqlConnect {
         try {
             //开始执行SQL预编译命令，并且保存结果集到resultSet
             if (preparedStatement.execute()) {
+                //execute()返回的是一个boolean值,代表两种不同的操作啊
+                // getResultSet()返回的是结果集,而getUpdateCount()返回的是更新的记数
                 resultSet = preparedStatement.executeQuery();
             } else {
-                resultCounts = preparedStatement.executeUpdate();//插入或修改操作
+                resultCounts = preparedStatement.getUpdateCount();//插入或修改操作
             }
 
         } catch (SQLException throwables) {
@@ -84,6 +86,10 @@ public class MysqlConnect {
                 preparedStatement.setInt(i + 1, Integer.parseInt(values[i]));
                 break;
             }
+            case Types.SMALLINT: {
+                preparedStatement.setShort(i + 1, Short.parseShort(values[i]));
+                break;
+            }
             case Types.FLOAT: {
                 preparedStatement.setFloat(i + 1, Float.parseFloat(values[i]));
                 break;
@@ -92,7 +98,8 @@ public class MysqlConnect {
                 preparedStatement.setDouble(i + 1, Double.parseDouble(values[i]));
                 break;
             }
-            case Types.VARCHAR: {
+            case Types.VARCHAR:
+            case Types.CHAR: {
                 preparedStatement.setString(i + 1, values[i]);
                 break;
             }

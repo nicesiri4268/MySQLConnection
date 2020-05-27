@@ -22,7 +22,8 @@ public class MysqlResultManage {
     public MysqlResultManage(ResultType resultType) {
         if (resultType.getResultSet() != null) {
             this.resultSet = resultType.getResultSet();
-        } else if (resultType.getResultCount() != -1) {
+        }
+        if (resultType.getResultCount() >= -1) {
             this.resultCount = resultType.getResultCount();
         }
         map = new ConcurrentHashMap<>();//初始化map
@@ -77,7 +78,7 @@ public class MysqlResultManage {
     }
 
     public int getResultCount() {
-        if (resultCount != -1)
+        if (resultCount > -1)
             return this.resultCount;
         else {
             return -1;
