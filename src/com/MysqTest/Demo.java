@@ -1,9 +1,10 @@
 package com.MysqTest;
 
-import com.Mysql.DataTable;
-import com.Mysql.MysqlConnect;
-import com.Mysql.MysqlMessage;
-import com.Mysql.MysqlResultManage;
+import com.MysqlTools.DataTable;
+import com.MysqlTools.MysqlConnect;
+import com.MysqlTools.MysqlMessage;
+import com.MysqlTools.MysqlResultManage;
+
 import java.sql.Types;
 import java.util.Scanner;
 

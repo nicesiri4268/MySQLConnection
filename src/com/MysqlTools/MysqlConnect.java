@@ -1,6 +1,6 @@
-package com.Mysql;
+package com.MysqlTools;
 
-import com.Mysql.Exception.MysqlConnectException;
+import com.MysqlTools.Exception.MysqlConnectException;
 
 import java.sql.*;
 

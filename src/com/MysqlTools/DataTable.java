@@ -1,6 +1,5 @@
-package com.Mysql;
+package com.MysqlTools;
 
-import java.sql.Connection;
 import java.util.*;
 
 public class DataTable {

@@ -1,8 +1,6 @@
 package com.MysqTest;
 
-import com.Mysql.*;
-
-import java.sql.*;
+import com.MysqlTools.*;
 
 public class MysqlConnectionTest {
     public MysqlConnectionTest() {

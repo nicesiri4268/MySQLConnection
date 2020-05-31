@@ -1,4 +1,4 @@
-package com.Mysql.Exception;
+package com.MysqlTools.Exception;
 
 public class MysqlConnectException extends RuntimeException {
     /**

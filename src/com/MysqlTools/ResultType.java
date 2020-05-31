@@ -1,4 +1,4 @@
-package com.Mysql;
+package com.MysqlTools;
 
 import java.sql.ResultSet;
 
